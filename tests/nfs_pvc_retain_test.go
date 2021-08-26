@@ -262,4 +262,12 @@ var _ = Describe("TEST NFS PVC WITH RETAIN RECLAIM POLICY", func() {
 			Expect(isBackendPVExist).To(BeFalse(), "backend pv %s shouldn't exist in cluster", backendPVName)
 		})
 	})
+
+	When("StorageClass "+scName+" is deleted", func() {
+		It("should delete the SC", func() {
+			By("deleting SC " + scName)
+			err := Client.deleteStorageClass(scName)
+			Expect(err).To(BeNil(), "while deleting sc %s", scName)
+		})
+	})
 })
